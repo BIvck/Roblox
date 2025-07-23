@@ -1595,7 +1595,7 @@ function Library:CreateWindow(opt)
 				DropDown["b2"]["TextColor3"] = Color3.fromRGB(201, 201, 201);
 				DropDown["b2"]["BackgroundTransparency"] = 1;
 				DropDown["b2"]["Size"] = UDim2.new(0, 0, 0, 25);
-				DropDown["b2"]["Text"] = [[Dropdown]];
+				DropDown["b2"]["Text"] = options.Text
 				DropDown["b2"]["AutomaticSize"] = Enum.AutomaticSize.X;
 				DropDown["b2"]["Name"] = [[Title]];
 				DropDown["b2"]["Position"] = UDim2.new(0, 10, 0, 12);

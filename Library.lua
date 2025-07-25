@@ -7,6 +7,7 @@
     also fuckass if u use this your a retard person
 
     #bisaya on top!
+    #keep gooning!
 
     -- #1 Nigger Lover
 ]]--
@@ -3461,3 +3462,5 @@ function Library:CreateWindow(opt)
 	
 	return winT
 end
+
+return Library

@@ -1,10 +1,12 @@
 --[[
-    Library Made for HopelessHub
+    Library Made for both of us ofcourse
     Developed by @oz
     Modified by @lksiwjas
 
     I modified a bit to this library
-    Oz paid this ui library to somewhere
+    also fuckass if u use this your a retard person
+
+    #bisaya on top!
 
     -- #1 Nigger Lover
 ]]--
@@ -1411,6 +1413,7 @@ function Library:CreateWindow(opt)
 				Name = "Slider",
 				DefaultValue = 50,
 				MinValue = 1,
+                Increment = 0,
 				MaxValue = 100,
 				Callback = function(v) end
 			},opt or {})
@@ -1421,7 +1424,8 @@ function Library:CreateWindow(opt)
 			--starting values
 			do
 			Slider.MinValue = opt.MinValue
-			Slider.MaxValue = opt.MaxValue + 1
+            Slider.Increment = opt.Increment
+			Slider.MaxValue = opt.MaxValue
 			Slider.CurrentValue = opt.DefaultValue	
 			end
 			
@@ -1509,20 +1513,37 @@ function Library:CreateWindow(opt)
 					return tonumber(Slider["42"].Text)
 				end
 
-				function Slider:SetValue(v)
-					if v ==  nil then
-						local precentage = math.clamp((Mouse.X - Slider["44"].AbsolutePosition.X) / (Slider["44"].AbsoluteSize.X), 0, 1)
-						local value = math.floor(((Slider.MaxValue - Slider.MinValue) * precentage) + Slider.MinValue)
+                function Slider:SetValue(v)
+                    local value
+                    local range = Slider.MaxValue - Slider.MinValue
 
-						Slider["42"].Text = tostring(value)
-						Library:tween(Slider["46"], {Size =UDim2.fromScale(precentage,1)},.6, Enum.EasingStyle.Exponential,Enum.EasingDirection.Out)
-					else
-						Slider["42"].Text = tostring(v)
+                    local steps = math.floor(range / Slider.Increment + 0.5)
 
-						Library:tween(Slider["46"], {Size =UDim2.fromScale(((v -Slider.MinValue) / (Slider.MaxValue - Slider.MinValue)),1) },1)
-					end
-					opt.Callback(Slider:GetValue())
-				end
+                    if v == nil then
+                        local percentage = math.clamp(
+                            (Mouse.X - Slider["44"].AbsolutePosition.X) / Slider["44"].AbsoluteSize.X,
+                            0, 1
+                        )
+
+                        local stepIndex = math.floor(percentage * steps + 0.5)
+                        value = Slider.MinValue + stepIndex * Slider.Increment
+                    else
+                        local stepIndex = math.floor(((v - Slider.MinValue) / Slider.Increment) + 0.5)
+                        stepIndex = math.clamp(stepIndex, 0, steps)
+                        value = Slider.MinValue + stepIndex * Slider.Increment
+                    end
+
+                    local percentage = (value - Slider.MinValue) / range
+
+                    Slider["42"].Text = string.format("%.3f", value)
+
+                    Library:tween(Slider["46"], {
+                        Size = UDim2.fromScale(percentage, 1)
+                    }, 0.6, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+
+                    opt.Callback(value)
+                end
+
 
 				do
 					Slider["42"].Text = tostring(Slider.CurrentValue)
@@ -3440,4 +3461,3 @@ function Library:CreateWindow(opt)
 	
 	return winT
 end
-return Library

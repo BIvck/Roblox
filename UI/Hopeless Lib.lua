@@ -697,7 +697,7 @@ local Library do
     Instances:Create("UIListLayout", {
         Parent = Library.NotifHolder.Instance,
         Name = "\0",
-        VerticalAlignment = Enum.VerticalAlignment.Bottom,
+        VerticalAlignment = Enum.VerticalAlignment.Top,
         Padding = UDimNew(0, 14),
         SortOrder = Enum.SortOrder.LayoutOrder
     })

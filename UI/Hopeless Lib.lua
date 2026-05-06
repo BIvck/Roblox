@@ -3574,7 +3574,7 @@ local Library do
                     Parent = Library.Holder.Instance,
                     Name = "\0",
                     AnchorPoint = Vector2New(0.5, 0),
-                    Position = UDim2New(0.5, 0, 0, 20),
+                    Position = UDim2New(0.5, 0, 0, 1),
                     BorderColor3 = FromRGB(0, 0, 0),
                     BorderSizePixel = 0,
                     AutomaticSize = Enum.AutomaticSize.XY,
@@ -3589,6 +3589,17 @@ local Library do
                     CornerRadius = UDimNew(0, 5)
                 })
 
+                Items["Liner"] = Instances:Create("Frame", {
+                    Parent = Items["Watermark"].Instance,
+                    Name = "\0",
+                    Position = UDim2New(0, 0, 0, 0),
+                    ZIndex = 2,
+                    BorderColor3 = FromRGB(0, 0, 0),
+                    Size = UDim2New(0, 0, 0, 2),
+                    BorderSizePixel = 0,
+                    BackgroundColor3 = FromRGB(0, 178, 255)
+                })  Items["Liner"]:AddToTheme({BackgroundColor3 = "Accent"})
+
                 Items["Text"] = Instances:Create("TextLabel", {
                     Parent = Items["Watermark"].Instance,
                     Name = "\0",
@@ -3598,6 +3609,8 @@ local Library do
                     Text = Name,
                     BackgroundTransparency = 1,
                     BorderSizePixel = 0,
+                    Position = UDim2New(0, 5, 0, 3.5),
+                    ZIndex = 3,
                     AutomaticSize = Enum.AutomaticSize.XY,
                     TextSize = 16,
                     RichText = true,
@@ -3607,10 +3620,10 @@ local Library do
                 Instances:Create("UIPadding", {
                     Parent = Items["Watermark"].Instance,
                     Name = "\0",
-                    PaddingTop = UDimNew(0, 8),
-                    PaddingBottom = UDimNew(0, 8),
-                    PaddingRight = UDimNew(0, 8),
-                    PaddingLeft = UDimNew(0, 8)
+                    PaddingTop = UDimNew(0, 5),
+                    PaddingBottom = UDimNew(0, 5),
+                    PaddingRight = UDimNew(0, 5),
+                    PaddingLeft = UDimNew(0, 5)
                 })
             end
 
@@ -3627,6 +3640,7 @@ local Library do
             Library:Connect(RunService.RenderStepped, function()
                 local FullTime = os.date("%I:%M %p")
                 Items["Text"].Instance.Text = FormatAccentText(Name) .. " | " .. FullTime
+                Items["Liner"].Instance.Size = UDim2New(0, Items["Text"].Instance.TextBounds.X + 8, 0, 2)
             end)
 
             return Watermark

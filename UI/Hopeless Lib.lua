@@ -915,8 +915,8 @@ local Library do
     end
 
     Library.DeleteConfig = function(self, Config)
-        if isfile(Library.Folders.Configs .. "/" .. Config) then 
-            delfile(Library.Folders.Configs .. "/" .. Config)
+        if isfile(Config) then 
+            delfile(Config)
         end
     end
 
@@ -5339,7 +5339,7 @@ local Library do
 
                 LoadAndSaveButton:Add("Load", function()
                     if ConfigSelected then
-                        local Success, Error = Library:LoadConfig(readfile(Library.Folders.Configs .. "/" .. ConfigSelected))
+                        local Success, Error = Library:LoadConfig(readfile(ConfigSelected))
 
                         if Success then 
                             Library:Notification("Success", "Loaded config "..ConfigSelected .. " succesfully", 5)

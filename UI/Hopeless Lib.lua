@@ -5098,7 +5098,8 @@ local Library do
                     BorderSizePixel = 0,
                     AutomaticSize = Enum.AutomaticSize.X,
                     TextSize = 16,
-                    ZIndex = 2, 
+                    ZIndex = 2,
+                    RichText = true,
                     BackgroundColor3 = FromRGB(255, 255, 255)
                 })  Items["Text"]:AddToTheme({TextColor3 = "Text"})
 
